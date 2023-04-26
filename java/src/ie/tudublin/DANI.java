@@ -68,12 +68,24 @@ public class DANI extends PApplet {
 		//fullScreen(SPAN);
 	}
 
-    String[] sonnet;
-
-    public String[] writeSonnet()
-    {
-        return null;
-    }
+	public String writesonnet() {
+		String sonnet = "";
+		for (int i = 0; i < 14; i++) {
+		  Text start = model.get((int) parent.random(model.size()));
+		  String sentence = start.getText();
+		  for (int j = 0; j < 8; j++) {
+			ArrayList<Follow> follows = start.getFollows();
+			if (follows.size() == 0) {
+			  break;
+			}
+			Follow follow = follows.get((int) parent.random(follows.size()));
+			sentence += " " + follow.getText();
+			start = getText(follow.getText());
+		  }
+		  sonnet += sentence + "\n";
+		}
+		return sonnet;
+	  }
 
 	public void setup() {
 		colorMode(HSB);
