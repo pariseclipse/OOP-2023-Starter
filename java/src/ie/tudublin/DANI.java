@@ -33,6 +33,35 @@ public class DANI extends PApplet {
 			}
 		  }
 		
+		  public void printoutModel() {
+			for (Text w : model) {
+			  parent.print(w.getText() + ": ");
+			  for (Follow f : w.getFollows()) {
+				parent.print(f.getText() + "(" + f.getCount() + ") ");
+			  }
+			  parent.println();
+			}
+		  }
+		
+		  private boolean findText(String text) {
+			for (Text w : model) {
+			  if (w.getText().equals(text)) {
+				return true;
+			  }
+			}
+			return false;
+		  }
+		
+		  private Text getText(String text) {
+			for (Text w : model) {
+			  if (w.getText().equals(text)) {
+				return w;
+			  }
+			}
+			return null;
+		  }
+		
+	
 
 	public void settings() {
 		size(1000, 1000);
