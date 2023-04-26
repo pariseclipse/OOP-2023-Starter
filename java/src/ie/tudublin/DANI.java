@@ -14,8 +14,8 @@ public class DANI extends PApplet {
 		this.parent = parent;
 	}
 
-	public void fileLoading(String DANI) {
-		String[] lines = parent.loadStrings(DANI);
+	public void loadFile(String shakespere) {
+		String[] lines = parent.loadStrings("shakespere.txt");
 		for (int i = 0; i < lines.length; i++) {
 			String[] texts = parent.split(lines[i], ' ');
 			for (int j = 0; j < texts.length; j++) {
@@ -61,14 +61,62 @@ public class DANI extends PApplet {
 			return null;
 		  }
 		
-	
+	 private class Follow {
+			private String text;
+			private int count;
+		
+			public Follow(String text) {
+			  this.text = text;
+			  this.count = 1;
+			}
+		
+			public String getText() {
+			  return text;
+			}
+		
+			public int getCount() {
+			  return count;
+			}
+		
+			public void increment() {
+			  count++;
+			}
+		
+			public String toString() {
+			  return text + "(" + count + ")";
+			}
+		  }
+		
+		  private class Text {
+			private String text;
+			private ArrayList<Follow> follows;
+		
+			public Text(String text) {
+			  this.text = text;
+			  follows = new ArrayList<Follow>();
+			}
+		
+			public String getText() {
+			  return text;
+			}
+		
+			public ArrayList<Follow> getFollows() {
+			  return follows;
+			}
+		
+			public void addFollow(String text) {
+			  Follow follow = findFollow(text);
+			  if (follow == null) {
+				follow = new Follow(text);
+			  }
+
 
 	public void settings() {
 		size(1000, 1000);
 		//fullScreen(SPAN);
 	}
 
-	public String writesonnet() {
+	public String writeSonnet() {
 		String sonnet = "";
 		for (int i = 0; i < 14; i++) {
 		  Text start = model.get((int) parent.random(model.size()));
